@@ -4,29 +4,28 @@ public:
         int n1=nums1.size();
         int n2=nums2.size();
         
-        vector<int> v;
-        int a;
-        for(int i=0;i<n1;i++){
-            a=100000;
-            for(int j=0;j<n2;j++){
-               
-                
-            
-                if(nums1[i]==nums2[j]){
-                   a=j;
-                
-            }
-                if(nums1[i]<nums2[j] && j>a){
-                    v.push_back(nums2[j]);
-                    break;
-                }
-                else if( j==n2-1){
-                    v.push_back(-1);
-                     break;
-                }
-            }
-        }
+       vector<int> v;
+       stack<int> st;
+       map<int,int> m;
+       
+       for(int i=n2-1;i>=0;i--){
+           while(!st.empty() && st.top()<=nums2[i]){
+               st.pop();
+           }
+           if(st.empty()){
+               m[nums2[i]]=-1;
+           }
+           else{
+               m[nums2[i]]=st.top();
+           }
+           st.push(nums2[i]);
+       }
+
+       for(int i=0;i<n1;i++){
+           if(m.find(nums1[i])!=m.end()){
+               v.push_back(m[nums1[i]]);
+           }
+       }
         return v;
-        
     }
 };
