@@ -5,13 +5,12 @@ public:
 map<int,int> m;
         for(int i=0;i<n;i++){
             m[nums[i]]++;
-        }
-        for(auto i:m){
-            if(i.second>1){
-                return i.first;
+             if( m[nums[i]]>1){
+                return nums[i];
                 break;
             }
         }
+        
         return 0;
     }
 };
